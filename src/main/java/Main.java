@@ -10,6 +10,9 @@ class WrongStudentAge extends Exception {
 class WrongDateOfBirth extends Exception {
 }
 
+class MenuChoiceError extends Exception {
+}
+
 class Main {
   public static Scanner scan = new Scanner(System.in);
 
@@ -37,19 +40,25 @@ class Main {
         System.out.println("Invalid student's age! (1-99)");
       } catch (WrongDateOfBirth e) {
         System.out.println("Invalid student's date! (DD-MM-YYYY)");
+      } catch (MenuChoiceError e) {
+        System.out.println("Invalid menu choice! (Not a number)");
       }
 
     }
   }
 
-  public static int menu() {
+  public static int menu() throws MenuChoiceError {
     System.out.println("Wciśnij:");
     System.out.println("1 - aby dodać studenta");
     System.out.println("2 - aby wypisać wszystkich studentów");
     System.out.println("3 - aby wyszukać studenta po imieniu");
     System.out.println("0 - aby wyjść z programu");
     System.out.print("");
-    return scan.nextInt();
+    var choice = scan.next();
+    if (!choice.matches("\\d+"))
+      throw new MenuChoiceError();
+    return Integer.parseInt(choice);
+
   }
 
   public static String ReadName() throws WrongStudentName {
