@@ -7,6 +7,9 @@ class WrongStudentName extends Exception {
 class WrongStudentAge extends Exception {
 }
 
+class WrongDateOfBirth extends Exception {
+}
+
 class Main {
   public static Scanner scan = new Scanner(System.in);
 
@@ -32,6 +35,8 @@ class Main {
         System.out.println("Invalid student's name! (no spaces allowed)");
       } catch (WrongStudentAge e) {
         System.out.println("Invalid student's age! (1-99)");
+      } catch (WrongDateOfBirth e) {
+        System.out.println("Invalid student's date! (DD-MM-YYYY)");
       }
 
     }
@@ -66,11 +71,18 @@ class Main {
     return age;
   }
 
-  public static void exercise1() throws IOException, WrongStudentName, WrongStudentAge {
-    var name = ReadName();
-    var age = ReadAge();
+  public static String ReadDate() throws WrongDateOfBirth {
     System.out.println("Podaj datę urodzenia DD-MM-YYYY");
     var date = scan.nextLine();
+    if (!date.matches("\\d{2}-\\d{2}-\\d{4}"))
+      throw new WrongDateOfBirth();
+    return date;
+  }
+
+  public static void exercise1() throws IOException, WrongStudentName, WrongStudentAge, WrongDateOfBirth {
+    var name = ReadName();
+    var age = ReadAge();
+    var date = ReadDate();
     (new Service()).addStudent(new Student(name, age, date));
   }
 

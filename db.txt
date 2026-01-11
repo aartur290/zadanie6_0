@@ -1,6 +1,8 @@
-Adam 14 25.02.2014
-Janusz 25 16.06.2001
-Julia 21 11.01.2005
-Grzegorz 1 22.06.2025
-Marcin 99 14.12.1927
-Kornelia 86 20.03.1940
+Adam 14 25-02-2014
+Janusz 25 16-06-2001
+Julia 21 11-01-2005
+Grzegorz 1 22-06-2025
+Marcin 99 14-12-1927
+Kornelia 86 20-03-1940
+Antoni 51 23-08-1975
+Stanisław 61 14-08-1965
