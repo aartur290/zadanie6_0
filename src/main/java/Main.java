@@ -13,6 +13,9 @@ class WrongDateOfBirth extends Exception {
 class MenuChoiceError extends Exception {
 }
 
+class MenuOutOfRange extends Exception {
+}
+
 class Main {
   public static Scanner scan = new Scanner(System.in);
 
@@ -42,12 +45,14 @@ class Main {
         System.out.println("Invalid student's date! (DD-MM-YYYY)");
       } catch (MenuChoiceError e) {
         System.out.println("Invalid menu choice! (Not a number)");
+      } catch (MenuOutOfRange e) {
+        System.out.println("Invalid menu choice! (Out of range)");
       }
 
     }
   }
 
-  public static int menu() throws MenuChoiceError {
+  public static int menu() throws MenuChoiceError, MenuOutOfRange {
     System.out.println("Wciśnij:");
     System.out.println("1 - aby dodać studenta");
     System.out.println("2 - aby wypisać wszystkich studentów");
@@ -57,6 +62,8 @@ class Main {
     var choice = scan.next();
     if (!choice.matches("\\d+"))
       throw new MenuChoiceError();
+    if (!choice.matches("[0-3]"))
+      throw new MenuOutOfRange();
     return Integer.parseInt(choice);
 
   }
