@@ -25,7 +25,15 @@ public class Service {
             line = reader.readLine();
             if (line == null)
                 break;
-            ret.add(Student.Parse(line));
+            try {
+                ret.add(Student.Parse(line));
+            } catch (WrongStudentName e) {
+                System.out.println("Invalid student's name! (no spaces allowed)");
+            } catch (WrongStudentAge e) {
+                System.out.println("Invalid student's age! (1-99)");
+            } catch (WrongDateOfBirth e) {
+                System.out.println("Invalid student's date! (DD-MM-YYYY)");
+            }
         }
         reader.close();
         return ret;
