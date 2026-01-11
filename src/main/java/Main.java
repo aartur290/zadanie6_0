@@ -4,6 +4,9 @@ import java.util.Scanner;
 class WrongStudentName extends Exception {
 }
 
+class WrongStudentAge extends Exception {
+}
+
 class Main {
   public static Scanner scan = new Scanner(System.in);
 
@@ -25,10 +28,12 @@ class Main {
             return;
         }
       } catch (IOException e) {
-
       } catch (WrongStudentName e) {
-        System.out.println("Błędne imię studenta!");
+        System.out.println("Invalid student's name! (no spaces allowed)");
+      } catch (WrongStudentAge e) {
+        System.out.println("Invalid student's age! (1-99)");
       }
+
     }
   }
 
@@ -38,6 +43,7 @@ class Main {
     System.out.println("2 - aby wypisać wszystkich studentów");
     System.out.println("3 - aby wyszukać studenta po imieniu");
     System.out.println("0 - aby wyjść z programu");
+    System.out.print("");
     return scan.nextInt();
   }
 
@@ -51,11 +57,18 @@ class Main {
     return name;
   }
 
-  public static void exercise1() throws IOException, WrongStudentName {
-    var name = ReadName();
+  public static int ReadAge() throws WrongStudentAge {
     System.out.println("Podaj wiek: ");
     var age = scan.nextInt();
     scan.nextLine();
+    if (age < 1 || age > 99)
+      throw new WrongStudentAge();
+    return age;
+  }
+
+  public static void exercise1() throws IOException, WrongStudentName, WrongStudentAge {
+    var name = ReadName();
+    var age = ReadAge();
     System.out.println("Podaj datę urodzenia DD-MM-YYYY");
     var date = scan.nextLine();
     (new Service()).addStudent(new Student(name, age, date));
